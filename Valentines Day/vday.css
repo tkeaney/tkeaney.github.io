@@ -53,13 +53,9 @@ body {
 }
 
 .envelope.open .envelope-message {
-    opacity: 1;
-    transform: scale(1);
+    background: transparent;
 }
 
-.envelope.open {
-    transform: scale(1.4);
-}
 
 
 h1 {
