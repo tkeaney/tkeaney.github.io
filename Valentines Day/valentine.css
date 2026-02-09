@@ -87,24 +87,4 @@ h1 {
     transform: translateY(-2px);
     box-shadow: 0 15px 30px rgba(190, 24, 93, 0.6);
 }
-.polaroid {
-    background: white;
-    padding: 0.75rem 0.75rem 1.5rem;
-    border-radius: 14px;
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-    text-align: center;
-}
 
-.polaroid img {
-    width: 100%;
-    height: 140px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 0.5rem;
-}
-
-.polaroid span {
-    font-size: 0.85rem;
-    font-style: italic;
-    color: #9f1239;
-}

@@ -19,8 +19,8 @@ body {
 
 .envelope {
     position: relative;
-    width: 220px;
-    height: 140px;
+    width: 300px;
+    height: 250px;
     cursor: pointer;
     transition: transform 0.3s ease;
 }
