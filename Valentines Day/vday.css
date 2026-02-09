@@ -54,26 +54,14 @@ body {
 
 .envelope.open .envelope-message {
     opacity: 1;
-    transform: scale(1.5);
+    transform: scale(1.2);
+    background: transparent; /* removes white */
+}
+
+.envelope.open .envelope-front {
+    opacity: 0;
 }
 
 h1 {
     color: #be185d;
-    margin-bottom: 0.5rem;
-}
-
-/* Confetti */
-.confetti-piece {
-    position: absolute;
-    width: 8px;
-    height: 12px;
-    opacity: 0.9;
-    animation: fall 2.5s linear forwards;
-}
-
-@keyframes fall {
-    to {
-        transform: translateY(100vh) rotate(360deg);
-        opacity: 0;
-    }
 }

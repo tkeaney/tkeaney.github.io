@@ -1,8 +1,7 @@
 function openEnvelope() {
-    const envelope = document.querySelector(".envelope");
-    envelope.classList.add("open");
-    launchConfetti();
+    document.querySelector(".envelope").classList.add("open");
 }
+
 
 function launchConfetti() {
     const colors = ["#ec4899", "#f472b6", "#fda4af", "#fb7185"];
