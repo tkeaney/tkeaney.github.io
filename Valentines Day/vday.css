@@ -53,10 +53,9 @@ body {
 }
 
 .envelope.open .envelope-message {
-    background: transparent;
+    opacity: 1;
+    transform: scale(1.5);
 }
-
-
 
 h1 {
     color: #be185d;
