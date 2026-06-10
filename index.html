@@ -1,22 +1,513 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Tess | Home</title>
-    <link rel="stylesheet" href="index.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tess Keaney</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --rose:    #C2185B;
+      --rose-light: #E91E8C;
+      --blush:   #F8BBD9;
+      --blush-bg: #FDF0F6;
+      --lavender: #F3F0FA;
+      --white:   #FAFAFA;
+      --charcoal: #2D2D2D;
+      --mid:     #6B6B6B;
+      --border:  #EDE0EA;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--charcoal);
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 5%;
+      background: rgba(250,250,250,0.88);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.2rem;
+      color: var(--rose);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--mid);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--rose); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 8rem 5% 4rem;
+      background: linear-gradient(135deg, var(--white) 60%, var(--blush-bg) 100%);
+    }
+
+    .hero-inner {
+      max-width: 780px;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      line-height: 1.05;
+      color: var(--charcoal);
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-name span {
+      color: var(--rose);
+      position: relative;
+      display: inline-block;
+    }
+
+    .hero-name span::after {
+      content: '';
+      position: absolute;
+      bottom: 4px;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background: var(--blush);
+      border-radius: 2px;
+      animation: underline-in 0.8s 0.4s ease forwards;
+    }
+
+    @keyframes underline-in {
+      to { width: 100%; }
+    }
+
+    .hero-title {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      font-weight: 300;
+      color: var(--mid);
+      margin-bottom: 1.75rem;
+    }
+
+    .hero-bio {
+      font-size: 1.05rem;
+      color: var(--charcoal);
+      max-width: 580px;
+      margin-bottom: 2.5rem;
+      line-height: 1.75;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--rose);
+      color: white;
+      padding: 0.75rem 1.75rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-primary:hover {
+      background: var(--rose-light);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      border: 1.5px solid var(--rose);
+      color: var(--rose);
+      padding: 0.75rem 1.75rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .btn-secondary:hover {
+      background: var(--blush-bg);
+      transform: translateY(-1px);
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 5rem 5%;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      color: var(--charcoal);
+      margin-bottom: 3rem;
+    }
+
+    /* SKILLS */
+    #skills {
+      background: var(--lavender);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      max-width: 960px;
+    }
+
+    .skill-card {
+      background: white;
+      border-radius: 16px;
+      padding: 1.5rem;
+      border: 1px solid var(--border);
+    }
+
+    .skill-card h3 {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 0.85rem;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      background: var(--blush-bg);
+      color: var(--rose);
+      border-radius: 20px;
+      padding: 0.3rem 0.85rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    /* PROJECTS */
+    #projects {
+      background: var(--white);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+      max-width: 960px;
+    }
+
+    .project-card {
+      background: var(--blush-bg);
+      border-radius: 20px;
+      padding: 2rem;
+      border: 1px solid var(--border);
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(194, 24, 91, 0.1);
+    }
+
+    .project-status {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--rose);
+      background: white;
+      border-radius: 20px;
+      padding: 0.25rem 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .project-card h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem;
+      color: var(--charcoal);
+      margin-bottom: 0.5rem;
+    }
+
+    .project-card p {
+      font-size: 0.9rem;
+      color: var(--mid);
+      line-height: 1.65;
+      margin-bottom: 1.25rem;
+    }
+
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .project-tech span {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--mid);
+      background: white;
+      border-radius: 10px;
+      padding: 0.2rem 0.65rem;
+    }
+
+    .project-arrow {
+      margin-top: 1.25rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--rose);
+    }
+
+    /* CONTACT */
+    #contact {
+      background: var(--blush-bg);
+    }
+
+    .contact-inner {
+      max-width: 560px;
+    }
+
+    .contact-inner p {
+      color: var(--mid);
+      margin-bottom: 2rem;
+      font-size: 1rem;
+      line-height: 1.75;
+    }
+
+    .social-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      text-decoration: none;
+      color: var(--charcoal);
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .social-link:hover { color: var(--rose); }
+
+    .social-icon {
+      width: 38px;
+      height: 38px;
+      background: white;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border);
+      font-size: 1rem;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.8rem;
+      color: var(--mid);
+      border-top: 1px solid var(--border);
+    }
+
+    /* FADE IN */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .hero-actions { flex-direction: column; }
+    }
+  </style>
 </head>
-
 <body>
-    <div class="container">
-        <h1 class="header-text">Welcome to Tess’s Homepage ✨</h1>
 
-        <p class="text">
-            Hi! 
-        </p>
+  <nav>
+    <a href="#" class="nav-logo">TK</a>
+    <ul class="nav-links">
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
 
-       <a href="Task Organizer/index.html" class="cta-button">
-            Task Organizer
-        </a> 
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="hero-eyebrow">Software Engineer · Boston, MA</p>
+      <h1 class="hero-name">Tess <span>Keaney</span></h1>
+      <p class="hero-title">Building thoughtful software at the intersection of AI and everyday life.</p>
+      <p class="hero-bio">
+        I'm a software engineer at Fidelity Investments with a CS degree from UVA. I work across Salesforce, Java, and full-stack web — and I'm currently exploring what it means to build AI-powered products that actually learn from the people using them.
+      </p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn-primary">See my projects</a>
+        <a href="#contact" class="btn-secondary">Get in touch</a>
+      </div>
     </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <p class="section-label">What I work with</p>
+    <h2 class="section-title">Skills & Technologies</h2>
+    <div class="skills-grid">
+      <div class="skill-card fade-in">
+        <h3>Languages</h3>
+        <div class="skill-tags">
+          <span class="tag">Java</span>
+          <span class="tag">Python</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">Apex</span>
+          <span class="tag">HTML/CSS</span>
+          <span class="tag">C</span>
+          <span class="tag">R</span>
+        </div>
+      </div>
+      <div class="skill-card fade-in">
+        <h3>Frameworks & Tools</h3>
+        <div class="skill-tags">
+          <span class="tag">React</span>
+          <span class="tag">Angular</span>
+          <span class="tag">Salesforce</span>
+          <span class="tag">Git</span>
+          <span class="tag">Azure</span>
+          <span class="tag">BigQuery</span>
+          <span class="tag">Agile/Scrum</span>
+        </div>
+      </div>
+      <div class="skill-card fade-in">
+        <h3>Concepts</h3>
+        <div class="skill-tags">
+          <span class="tag">AI / ML</span>
+          <span class="tag">Data Structures</span>
+          <span class="tag">Algorithms</span>
+          <span class="tag">TDD</span>
+          <span class="tag">Cybersecurity</span>
+          <span class="tag">SQL / SOQL</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <p class="section-label">What I'm building</p>
+    <h2 class="section-title">Projects</h2>
+    <div class="projects-grid">
+      <a href="https://github.com/tkeaney/task-organizer" target="_blank" class="project-card fade-in">
+        <span class="project-status">🟡 In Progress</span>
+        <h3>Task Organizer</h3>
+        <p>An AI-powered task manager that learns your priorities over time. Built with React and the Claude API — the more you use it, the smarter it gets.</p>
+        <div class="project-tech">
+          <span>React</span>
+          <span>Vite</span>
+          <span>Claude API</span>
+          <span>Node.js</span>
+        </div>
+        <p class="project-arrow">View on GitHub →</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="section-label">Say hello</p>
+    <h2 class="section-title">Get in touch</h2>
+    <div class="contact-inner">
+      <p>I'm always open to chatting about software, AI, or interesting problems worth solving. Feel free to reach out.</p>
+      <div class="social-links">
+        <a href="mailto:tesslkeaney@gmail.com" class="social-link">
+          <span class="social-icon">✉️</span>
+          tesslkeaney@gmail.com
+        </a>
+        <a href="https://linkedin.com/in/tess-keaney" target="_blank" class="social-link">
+          <span class="social-icon">💼</span>
+          linkedin.com/in/tess-keaney
+        </a>
+        <a href="https://github.com/tkeaney" target="_blank" class="social-link">
+          <span class="social-icon">🐙</span>
+          github.com/tkeaney
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Built by Tess Keaney · 2026</p>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+
 </body>
 </html>
